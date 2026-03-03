@@ -21,15 +21,17 @@ Open the settings panel at any time with:
 2. [Interacting with Quests](#interacting-with-quests)
 3. [Categories](#categories)
 4. [Multiple Trackers](#multiple-trackers)
-5. [Settings — General](#settings--general)
-6. [Settings — Trackers](#settings--trackers)
-7. [Settings — Tiling](#settings--tiling)
-8. [Settings — Appearance > Fonts](#settings--appearance--fonts)
-9. [Settings — Appearance > Style](#settings--appearance--style)
-10. [Settings — Appearance > Colors](#settings--appearance--colors)
-11. [Settings — Appearance > Spacing](#settings--appearance--spacing)
-12. [Settings — Sounds](#settings--sounds)
-13. [Settings — Profiles](#settings--profiles)
+5. [Quest Item Buttons](#quest-item-buttons)
+6. [Settings — General](#settings--general)
+7. [Settings — Trackers](#settings--trackers)
+8. [Settings — Tiling](#settings--tiling)
+9. [Settings — Appearance > Fonts](#settings--appearance--fonts)
+10. [Settings — Appearance > Style](#settings--appearance--style)
+11. [Settings — Appearance > Colors](#settings--appearance--colors)
+12. [Settings — Appearance > Spacing](#settings--appearance--spacing)
+13. [Settings — Appearance > Quest Items](#settings--appearance--quest-items)
+14. [Settings — Sounds](#settings--sounds)
+15. [Settings — Profiles](#settings--profiles)
 
 ---
 
@@ -166,6 +168,52 @@ Each tracker has its own position, size, scroll bar, background, and title bar �
 configured independently under **Settings → Trackers → \[Tracker Name\]**.
 
 Trackers can be anchored together using the [Tiling](#settings--tiling) system.
+
+---
+
+## Quest Item Buttons
+
+<!-- SCREENSHOT: Quest row with an item button icon visible to the right of the title -->
+
+When a quest has a usable item (a "quest item" that appears on your action bar in the default
+UI), zQuestLog shows a clickable icon button for it directly in the tracker. You can use the
+item by clicking the button, and a cooldown swipe displays when the item is on cooldown.
+
+There are two ways these buttons can be displayed, controlled by **Show Inline** in
+**Settings → Appearance → Quest Items**.
+
+### Inline Mode (default)
+
+Item buttons appear directly to the right of the quest title inside the tracker window. They
+scroll with the content and clip to the visible scroll viewport, so they only appear when
+their quest row is on screen.
+
+### Panel Mode
+
+When **Show Inline** is turned off, each tracker gets a dedicated floating panel that holds
+all of that tracker's item buttons grouped together. The panel can be:
+
+- **Anchored** to any of 8 positions around its tracker window (right, left, above, below,
+  and the four corners)
+- **Free-floating** — drag it anywhere and the position is saved
+- Set to follow a **tile group's root or last tracker** instead of its own window
+
+Buttons stack inside the panel in a direction of your choice, and the panel has its own
+optional background texture and border.
+
+### Quest Numbering
+
+In panel mode you can enable **Denote Which Quest**, which places a small numbered badge
+both on each item button and on the quest's title row in the tracker. Since the buttons live
+outside the tracker in a separate panel, this lets you quickly match a button to its quest
+without hovering. Numbers are stable across sessions.
+
+### Combat Behavior
+
+Because the game restricts changes to clickable action buttons while in combat, item buttons
+won't move, update, or change their assigned item during a fight. They stay in place and keep
+their last-set item for the duration of combat. You can still click and use them normally
+-- updates just take effect once combat ends.
 
 ---
 
@@ -470,6 +518,60 @@ All spacing values are in pixels, ranging from 0 to 30 in 0.5-pixel steps.
 | **Progress Bar** | Both | Pixel gap above and below each progress bar row. |
 
 Use **Reset Spacing** to restore all spacing values to their defaults at once.
+
+---
+
+## Settings — Appearance > Quest Items
+
+Open with `/zql` → **Appearance** → **Quest Items**.
+
+> **Note:** All settings on this tab are disabled during combat.
+
+| Setting | Description |
+|---|---|
+| **Show Quest Items** | Master toggle. Shows a clickable icon button for any quest that has a usable quest item. |
+| **Show Inline** | When on (default), item buttons appear next to the quest title inside the tracker window and scroll with the content. When off, buttons are moved to a separate floating panel. |
+
+### Floating Panel
+
+These settings appear when **Show Inline** is turned off.
+
+| Setting | Description |
+|---|---|
+| **Attach To** | Which tracker window the panel follows: *Tracker Containing Quest*, *Tile Group Parent*, *Tile Group Last*, or *Free-Floating* (drag anywhere, position saved). |
+| **Anchor Point** | Which edge or corner of the target tracker the panel snaps to. Choose from 8 positions: Right (Top/Bottom), Left (Top/Bottom), Top (Left/Right), Bottom (Left/Right). Hidden when Attach To is set to Free-Floating. |
+| **Growth Direction** | The direction buttons stack inside the panel. *Auto* picks a sensible default based on the anchor; or choose Down, Up, Left, or Right explicitly. |
+| **Button Size** | Size of each item button in pixels (1–512). |
+| **Button Padding** | Space between the panel edge and the buttons in pixels (0–32). |
+
+### Panel Background
+
+| Setting | Description |
+|---|---|
+| **Show Background** | Draws a background texture behind the floating panel. |
+| **Background Texture** | The texture to use (LibSharedMedia supported). |
+| **Color Overlay** | Applies a color tint on top of the background texture. |
+| **Overlay Color** | Color and opacity of that tint. Only available when Color Overlay is on. |
+
+### Panel Border
+
+| Setting | Description |
+|---|---|
+| **Show Border** | Draws a border around the floating panel. |
+| **Border Thickness** | Thickness of the border in pixels (1–4). |
+| **Border Color** | Color and opacity of the border. |
+
+### Quest Numbering
+
+| Setting | Description |
+|---|---|
+| **Denote Which Quest** | Shows a small numbered badge on each item button and on its corresponding quest title row in the tracker. Useful when the panel is floating away from the tracker and you need to match buttons to quests at a glance. Numbers are stable and persist across sessions. |
+| **Badge Size** | Size of the number badge in pixels (8–32). |
+| **Badge Attach Point** | Where the badge sits relative to its item button — 8 positions outside the button or 4 corner overlays on top of it. |
+
+### Resets
+
+- **Reset Quest Item Panel** — restores all settings on this tab to their defaults.
 
 ---
 
