@@ -127,6 +127,16 @@ Hides the tracker window. The window is not destroyed — you can bring it back 
 **Left click** a header to collapse or expand the quests beneath it. The collapsed state is
 saved per character and persists across sessions.
 
+**Shift + Left click** a zone header in the Quests category to bulk-hide or bulk-unhide all
+quests under it at once:
+
+- If **any** quest under that header is currently hidden, Shift+click **unhides all** of them.
+- If **no** quests are hidden, Shift+click **hides all** of them.
+
+This only works on regular zone headers in the Quests section. World Quests, Bonus
+Objectives, Scenario, and Achievement headers Shift+click normally (collapse/expand).
+The `(N Hidden)` count on the header updates immediately to reflect the change.
+
 **Campaign headers** also show a tooltip on hover with details about the current campaign
 chapter.
 
@@ -239,8 +249,9 @@ Open with `/zql` then click the **General** tab.
 
 | Setting | Description |
 |---|---|
-| **Sort Nearest Quests** | Re-orders quests by proximity to your character. Campaign quests always stay at the top. The zone header with the closest quest floats to the top, and quests within each zone are sorted closest-first. |
+| **Sort Nearest Quests** | Re-orders quests by proximity to your character. Campaign quests always stay at the top. The zone header with the closest quest floats to the top, and quests within each zone are sorted closest-first. Mutually exclusive with Current Zone First. |
 | **Auto Track Nearest Quest** | Automatically super-tracks the closest quest that has a known map location. Runs on its own separate timer. |
+| **Current Zone First** | Moves the zone header that matches your current in-game zone to the top of the quest list. Campaign headers always remain above it. Has no effect if there are no quests under your current zone's header. Mutually exclusive with Sort Nearest Quests — enabling one disables the other. |
 | **Sort Nearest Poll Rate** | How often (in seconds, 1–15) the distance sort re-evaluates. Default: 2 s. |
 | **Auto Track Poll Rate** | How often (in seconds, 1–15) the auto-track re-evaluates which quest is closest. Default: 6 s. |
 
