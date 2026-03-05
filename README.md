@@ -255,6 +255,12 @@ Open with `/zql` then click the **General** tab.
 | **Sort Nearest Poll Rate** | How often (in seconds, 1–15) the distance sort re-evaluates. Default: 2 s. |
 | **Auto Track Poll Rate** | How often (in seconds, 1–15) the auto-track re-evaluates which quest is closest. Default: 6 s. |
 
+### Campaigns
+
+| Setting | Description |
+|---|---|
+| **Track Old Campaigns** | When enabled, quests from older expansion campaigns are grouped under their own campaign headers instead of appearing as regular zone quests. This is an experimental feature — a confirmation dialog will appear before it takes effect. |
+
 ### Resets
 
 - **Reset General Settings** — restores all settings on this tab to their defaults.
@@ -411,6 +417,14 @@ checkbox fills, and the quest count label.
 | **Use Class Color** | Sets the accent to your character's class color automatically. |
 | **UI Accent Color** | Custom color and opacity. Disabled when Use Class Color is on. |
 
+### Scroll Bar
+
+| Setting | Description |
+|---|---|
+| **Smooth Scrolling** | When on, scrolling animates smoothly to each new position instead of jumping. |
+
+> The scroll bar visibility toggle is per-tracker and lives under **Settings → Trackers → [Tracker Name]**.
+
 ### Tracked Glow
 
 When a quest is super-tracked (arrow/minimap pin is active), zQuestLog can visually highlight
@@ -437,6 +451,7 @@ A decorative divider line can be drawn between category sections and below campa
 | **Use Class Color** | Colors the separator graphic with your class color. |
 | **Overlay Color** | Custom color and opacity for the separator graphic. Disabled when Use Class Color is on. |
 | **Show Campaign Separator** | Draws a separator line below each campaign quest group. |
+| **Show Between Campaigns** | Draws an additional separator line between individual campaign groups. Only available when Show Campaign Separator is on. |
 
 ---
 
@@ -666,7 +681,7 @@ and activated immediately.
 - **Stacking trackers cleanly** — enable the Tiling system and set a child tracker's
   **Anchor Point** to *Top Left* and **Parent Anchor** to *Bottom Left* with Offset Y = 0 for
   a seamless stack with no gap.
-- **Class-colored everything** — enable **Use Class Color** in both Style > UI Elements and
+- **Class-colored everything** — enable **Use Class Color** in both Style > UI Accent Color and
   Style > Separator to get a cohesive class-themed look without touching any color pickers.
 - **Profiles as presets** — create a *Compact* profile with small fonts and tight spacing and
   a *Detailed* profile with larger fonts and buffers, then switch between them with the Active
