@@ -44,18 +44,31 @@ below it. The title bar holds several controls, described left to right.
 
 ### Title Bar Controls
 
-#### Eye Toggle (far left)
+Buttons are arranged left to right as follows.
+
+#### Minimize Button (far left)
+
+Collapses the tracker content area down to just the title bar, leaving the bar itself
+visible. Click again to restore. Hovering shows a tooltip confirming **Minimize Tracker**
+or **Restore Tracker** depending on the current state.
+
+#### Eye Toggle (second from left)
 
 The eye icon toggles **Show User-Hidden Quests**. When the eye is open, quests you have
 previously hidden with Shift+click are shown in a dimmed state so you can still see them.
 When the eye is closed they are fully hidden. This is a global setting shared across all
 tracker windows.
 
-#### Quest Count (next to the eye)
+#### Dungeon Filter Button (third from left, Main Tracker only)
 
-When the **Quests** category is active, a small `N/M` counter appears showing how many quests
-are tracked versus your character's quest log cap. Clicking it toggles the same
-Show User-Hidden Quests setting as the eye icon.
+Always visible on the **Main Tracker**. Toggles the **Dungeon Quest Filter**, which hides
+quests unrelated to the current dungeon or raid instance so you only see the quests relevant
+to where you are. When the filter is active the icon turns red.
+
+#### Quest Count (next to the dungeon button)
+
+When the **Quests** category is active, a small `N/M` read-only counter shows how many
+quests are in your log versus your character's quest cap.
 
 #### Title Text (center)
 
@@ -66,18 +79,12 @@ Displays the tracker's identity. You can control what appears here per tracker i
 - **Categories in Title** — shows short category letters (e.g. *Q · W · S*) indicating which
   content types are displayed.
 
-#### Dungeon Filter Button (right side, instance only)
-
-This button only appears on the **Main Tracker** while you are inside a dungeon or raid. It
-toggles the **Dungeon Quest Filter**, which hides quests that are unrelated to the current
-instance so you only see the quests relevant to where you are.
-
 #### Tiling Icon (right side, when tiling is active)
 
 Appears when this tracker is part of a tile group. Click it to open a small menu with a
 **Disable Tiling For This Tracker** option. Hovering shows a *Tile Group* tooltip.
 
-#### Burger Menu (≡)
+#### Burger Menu (≡, second from right)
 
 Opens a small dropdown menu with bulk header actions:
 
@@ -240,6 +247,7 @@ Open with `/zql` then click the **General** tab.
 | **Show User-Hidden Quests** | Globally shows or hides quests you have Shift+clicked to hide. Same as the eye toggle on each tracker. |
 | **Show World Quests** | Enables world quest display in the World Quests category. |
 | **Show WQ Duration** | Appends a live `[HH:MM:SS]` countdown on each world quest title. Refreshes every 500 ms while active. |
+| **Show Quest Level** | Shows a `[level]` bracket before each quest title. On by default. |
 | **Show Bonus Objectives** | Enables bonus objective display in the Bonus Objectives category. |
 | **Show Completed Achievement Objectives** | Shows criteria that are already completed when displaying tracked achievements. |
 | **Hide Completed Objectives** | Hides numbered "X/Y" objectives once the line reads *(Done)*. Text-only objectives are always shown. |
@@ -373,15 +381,14 @@ Controls the font size, face, and rendering style for each text type.
 
 | Setting | Description |
 |---|---|
-| **Header Size** | Font size for zone and campaign header lines (5–32). |
+| **Header Size** | Font size for zone/category header lines (5–32). |
 | **Title Size** | Font size for quest and achievement title lines (5–32). |
 | **Objective Size** | Font size for objective and criteria lines (5–32). |
-| **Chapter Size** | Font size for campaign chapter sub-lines (5–32). |
 
 ### Font Faces
 
-Each of the four text types (Header, Title, Objective, Chapter) has a dropdown that lists
-every font registered with LibSharedMedia, including any fonts added by other addons.
+Each of the three text types (Header, Title, Objective) has a dropdown that lists every font
+registered with LibSharedMedia, including any fonts added by other addons.
 
 ### Rendering Style
 
@@ -398,8 +405,20 @@ Each text type also has a rendering dropdown:
 
 ### Resets
 
-Each font type has its own **Reset \[Type\] Font** button that restores both the face and the
-rendering flag back to *Friz Quadrata TT* (the default WoW UI font) at the default size.
+**Reset Header Font**, **Reset Title Font**, and **Reset Objective Font** each restore the
+corresponding face and rendering flag back to *Friz Quadrata TT* at the default size.
+
+### Campaigns
+
+Campaign headers and chapter sub-lines have their own font section below the main controls.
+
+| Setting | Description |
+|---|---|
+| **Campaign Header Size / Font / Rendering** | Font controls for campaign name header lines. |
+| **Chapter Size / Font / Rendering** | Font controls for the chapter sub-line beneath each campaign header. |
+
+Separate **Reset Campaign Header Fonts** and **Reset Campaign Chapter Fonts** buttons restore
+each group to defaults.
 
 ---
 
@@ -407,7 +426,7 @@ rendering flag back to *Friz Quadrata TT* (the default WoW UI font) at the defau
 
 Open with `/zql` → **Appearance** → **Style**.
 
-### UI Accent Color
+### UI Elements
 
 The accent color is used for the title bar text, the thin border line, the scroll bar thumb,
 checkbox fills, and the quest count label.
@@ -416,12 +435,14 @@ checkbox fills, and the quest count label.
 |---|---|
 | **Use Class Color** | Sets the accent to your character's class color automatically. |
 | **UI Accent Color** | Custom color and opacity. Disabled when Use Class Color is on. |
+| **Show Button Backdrop** | Shows a border and background behind each title bar button. |
 
-### Scroll Bar
+### Scroll and Progress Bars
 
 | Setting | Description |
 |---|---|
 | **Smooth Scrolling** | When on, scrolling animates smoothly to each new position instead of jumping. |
+| **Progressbar Percent** | When on (default), shows the completion percentage centered on each progress bar. The percentage is removed from the objective text below the bar so it isn't shown twice. |
 
 > The scroll bar visibility toggle is per-tracker and lives under **Settings → Trackers → [Tracker Name]**.
 
@@ -472,14 +493,12 @@ Open with `/zql` → **Appearance** → **Colors**. Split into two sub-tabs: **Q
 | **Quest Title** | Quest title text when Color by Difficulty is off. |
 | **Completed Title** | Quest title text when the quest is ready to turn in (used in both modes). |
 
-**Chapter Colors**
+**Campaign Colors**
 
 | Setting | What it applies to |
 |---|---|
+| **Campaign Header** | The campaign name header text. |
 | **Campaign Chapter** | The chapter sub-line shown beneath a campaign header. |
-| **Chapter Size** | Font size of chapter lines (5–32). |
-| **Chapter Font** | Font face for chapter lines. |
-| **Chapter Rendering** | Rendering style for chapter lines (same options as the Fonts tab). |
 
 **World Quest Colors**
 
@@ -536,6 +555,8 @@ All spacing values are in pixels, ranging from 0 to 30 in 0.5-pixel steps.
 | Group | Top / Bottom | Description |
 |---|---|---|
 | **Tracked Header** | Both | Pixel gap above and below each zone/category header row. |
+| **Campaign Header** | Both | Pixel gap above and below each campaign name header row. |
+| **Campaign Chapter** | Both | Pixel gap above and below each campaign chapter sub-line. |
 | **Tracked Title** | Both | Pixel gap above and below each quest, world quest, bonus objective, or achievement title row. |
 | **Tracked Objective** | Both | Pixel gap above and below each objective or achievement criteria row. |
 | **Tracked Object Buffer** | Single | Extra gap inserted between the last objective of one entry and the title of the next. Useful for visually separating quests when padding alone is not enough. |
@@ -557,6 +578,7 @@ Open with `/zql` → **Appearance** → **Quest Items**.
 |---|---|
 | **Show Quest Items** | Master toggle. Shows a clickable icon button for any quest that has a usable quest item. |
 | **Show Inline** | When on (default), item buttons appear next to the quest title inside the tracker window and scroll with the content. When off, buttons are moved to a separate floating panel. |
+| **Show When Minimized** | When on (default), item buttons remain visible when the tracker is minimized. When off, buttons hide while the tracker is collapsed. |
 
 ### Floating Panel
 
@@ -564,7 +586,7 @@ These settings appear when **Show Inline** is turned off.
 
 | Setting | Description |
 |---|---|
-| **Attach To** | Which tracker window the panel follows: *Tracker Containing Quest*, *Tile Group Parent*, *Tile Group Last*, or *Free-Floating* (drag anywhere, position saved). |
+| **Attach To** | Which tracker window the panel follows: *Main Tracker* or *Free Float* (drag anywhere, position saved). |
 | **Anchor Point** | Which edge or corner of the target tracker the panel snaps to. Choose from 8 positions: Right (Top/Bottom), Left (Top/Bottom), Top (Left/Right), Bottom (Left/Right). Hidden when Attach To is set to Free-Floating. |
 | **Growth Direction** | The direction buttons stack inside the panel. *Auto* picks a sensible default based on the anchor; or choose Down, Up, Left, or Right explicitly. |
 | **Button Size** | Size of each item button in pixels (1–512). |
@@ -585,14 +607,16 @@ These settings appear when **Show Inline** is turned off.
 |---|---|
 | **Show Border** | Draws a border around the floating panel. |
 | **Border Thickness** | Thickness of the border in pixels (1–4). |
-| **Border Color** | Color and opacity of the border. |
+| **Use UI Color** | Colors the border with the current UI accent color instead of a custom color. |
+| **Border Color** | Color and opacity of the border. Disabled when Use UI Color is on. |
 
 ### Quest Numbering
 
 | Setting | Description |
 |---|---|
 | **Denote Which Quest** | Shows a small numbered badge on each item button and on its corresponding quest title row in the tracker. Useful when the panel is floating away from the tracker and you need to match buttons to quests at a glance. Numbers are stable and persist across sessions. |
-| **Badge Size** | Size of the number badge in pixels (8–32). |
+| **Badge Size** | Size of the numbered badge on the item button in pixels (8–32). |
+| **Icon Size (Inline)** | Size of the numbered icon embedded in the quest title text in pixels (8–32). |
 | **Badge Attach Point** | Where the badge sits relative to its item button — 8 positions outside the button or 4 corner overlays on top of it. |
 
 ### Resets
