@@ -5,12 +5,12 @@ Issues for zQuestLog
 
 zQuestLog is a replacement for the default World of Warcraft quest tracker. It gives you a
 resizable, scrollable window with full color, font, spacing, and sound customization, plus
-support for multiple simultaneous tracker windows and a flexible tiling / anchoring system.
+support for multiple simultaneous tracker windows and a flexible tiling and anchoring system.
 
 Open the settings panel at any time with:
 
 ```
-/zql
+/zql options
 ```
 
 ---
@@ -22,104 +22,94 @@ Open the settings panel at any time with:
 3. [Categories](#categories)
 4. [Multiple Trackers](#multiple-trackers)
 5. [Quest Item Buttons](#quest-item-buttons)
-6. [Settings — General](#settings--general)
-7. [Settings — Trackers](#settings--trackers)
-8. [Settings — Tiling](#settings--tiling)
-9. [Settings — Appearance > Fonts](#settings--appearance--fonts)
-10. [Settings — Appearance > Style](#settings--appearance--style)
-11. [Settings — Appearance > Colors](#settings--appearance--colors)
-12. [Settings — Appearance > Spacing](#settings--appearance--spacing)
-13. [Settings — Appearance > Quest Items](#settings--appearance--quest-items)
-14. [Settings — Sounds](#settings--sounds)
-15. [Settings — Profiles](#settings--profiles)
+6. [Slash Commands](#slash-commands)
+7. [Settings — General](#settings--general)
+8. [Settings — Trackers](#settings--trackers)
+9. [Settings — Tiling](#settings--tiling)
+10. [Settings — Appearance > Fonts](#settings--appearance--fonts)
+11. [Settings — Appearance > Style](#settings--appearance--style)
+12. [Settings — Appearance > Colors](#settings--appearance--colors)
+13. [Settings — Appearance > Spacing](#settings--appearance--spacing)
+14. [Settings — Appearance > Quest Items](#settings--appearance--quest-items)
+15. [Settings — Sounds](#settings--sounds)
+16. [Settings — Profiles](#settings--profiles)
+17. [Tips and Tricks](#tips-and-tricks)
 
 ---
 
 ## The Tracker Window
 
-<!-- SCREENSHOT: Full tracker window with all title-bar buttons labeled -->
-
-The tracker window consists of a **title bar** across the top and a **scrollable content area**
-below it. The title bar holds several controls, described left to right.
+The tracker window has a **title bar** across the top and a **scrollable content area** below
+it. The title bar holds several controls described left to right.
 
 ### Title Bar Controls
 
-Buttons are arranged left to right as follows.
-
 #### Minimize Button (far left)
 
-Collapses the tracker content area down to just the title bar, leaving the bar itself
-visible. Click again to restore. Hovering shows a tooltip confirming **Minimize Tracker**
-or **Restore Tracker** depending on the current state.
+Collapses the content area down to just the title bar. Click again to restore.
 
 #### Eye Toggle (second from left)
 
-The eye icon toggles **Show User-Hidden Quests**. When the eye is open, quests you have
-previously hidden with Shift+click are shown in a dimmed state so you can still see them.
-When the eye is closed they are fully hidden. This is a global setting shared across all
-tracker windows.
+Toggles **Show User-Hidden Quests**. When the eye is open, quests you have previously hidden
+with Shift+click appear in a dimmed state. When closed they are fully invisible. This is a
+global setting shared across all tracker windows.
 
 #### Dungeon Filter Button (third from left, Main Tracker only)
 
-Always visible on the **Main Tracker**. Toggles the **Dungeon Quest Filter**, which hides
-quests unrelated to the current dungeon or raid instance so you only see the quests relevant
-to where you are. When the filter is active the icon turns red.
+Toggles the **Dungeon Quest Filter**, which hides quests unrelated to your current dungeon so
+you only see relevant quests inside instances. When active the icon turns red. Only present
+on the Main Tracker.
 
-#### Quest Count (next to the dungeon button)
+#### Quest Count
 
-When the **Quests** category is active, a small `N/M` read-only counter shows how many
-quests are in your log versus your character's quest cap.
+When the **Quests** category is active, a small `N/M` read-only counter shows how many quests
+are in your log versus your character's quest cap.
 
 #### Title Text (center)
 
-Displays the tracker's identity. You can control what appears here per tracker in
-**Settings → Trackers → \[Tracker Name\]**:
+Displays the tracker's identity — the addon name, short category letters, or both, depending
+on per-tracker settings.
 
-- **Addon in Title** — shows the text *zQuestLog* in the title bar.
-- **Categories in Title** — shows short category letters (e.g. *Q · W · S*) indicating which
-  content types are displayed.
+#### Auto-Hide Title Buttons
+
+If **Auto-Hide Title Buttons** is enabled in the Style settings, the title bar buttons fade
+out when you are not hovering the title bar and fade back in when you move your cursor over
+it.
 
 #### Tiling Icon (right side, when tiling is active)
 
-Appears when this tracker is part of a tile group. Click it to open a small menu with a
-**Disable Tiling For This Tracker** option. Hovering shows a *Tile Group* tooltip.
+Appears when this tracker belongs to a tile group. Click it to open a menu with a
+**Disable Tiling For This Tracker** option.
 
 #### Burger Menu (≡, second from right)
 
-Opens a small dropdown menu with bulk header actions:
+Opens a small dropdown for bulk header actions:
 
 | Option | What it does |
 |---|---|
-| **Expand all headers** | Expands every collapsed zone/category header in this tracker. |
-| **Collapse all headers** | Collapses every expanded zone/category header in this tracker. |
-| **Collapse Quest Headers** | Collapses only the zone headers inside the Quests section. Only shown when the Quests category is active. |
-| **Show Hidden Trackers** | Brings back any tracker windows you have closed via the X button. Only shown when at least one other tracker with content is currently hidden. |
-
-<!-- SCREENSHOT: Burger menu open showing all four rows -->
+| **Expand all headers** | Expands every collapsed header in this tracker. |
+| **Collapse all headers** | Collapses every expanded header in this tracker. |
+| **Collapse Quest Headers** | Collapses only zone headers in the Quests section. |
+| **Show Hidden Trackers** | Brings back any tracker windows you closed with the X button. Only shown when at least one other tracker with content is currently hidden. |
 
 #### Close Button (✕, far right)
 
-Hides the tracker window. The window is not destroyed — you can bring it back through
-**Show Hidden Trackers** in another tracker's burger menu, or by enabling
-**Show Tracker** in Settings → Trackers → \[Tracker Name\].
+Hides the tracker window. Bring it back through **Show Hidden Trackers** in another
+tracker's burger menu, or via **Show Tracker** in Settings → Trackers → [Tracker Name].
 
 ---
 
 ## Interacting with Quests
 
-<!-- SCREENSHOT: Quest row showing the supertrack glow indicator and << marker -->
-
 ### Quest Tiles
 
 | Click | Action |
 |---|---|
-| **Left click** | Super-tracks the quest (places the minimap pin and route arrow on it). If the quest is fully complete and ready to turn in, shows the completion UI instead. |
-| **Shift + Left click** | Toggles the quest as user-hidden. Hidden quests disappear from the tracker unless **Show User-Hidden Quests** is on. |
+| **Left click** | Super-tracks the quest (places the minimap pin). If the quest is fully complete, shows the completion UI instead. |
+| **Shift + Left click** | Toggles the quest as user-hidden. |
 | **Ctrl + Left click** | Inserts a quest link into chat. |
 | **Alt + Left click** | Opens the Quest Log to that quest's entry. |
 | **Right click** | Opens the quest detail / turn-in frame. |
-
-<!-- SCREENSHOT: Before/after Shift-click hiding a quest -->
 
 ### Achievement Tiles
 
@@ -127,62 +117,61 @@ Hides the tracker window. The window is not destroyed — you can bring it back 
 |---|---|
 | **Ctrl + Left click** | Inserts an achievement link into chat. |
 | **Shift + Left click** | Toggles the achievement as user-hidden. |
-| **Right click** | Opens the Achievements frame and navigates to that achievement. |
+| **Right click** | Opens the Achievements frame. |
 
 ### Zone / Category Headers
 
-**Left click** a header to collapse or expand the quests beneath it. The collapsed state is
-saved per character and persists across sessions.
+**Left click** a header to collapse or expand it. The collapsed state persists across
+sessions per character.
 
 **Shift + Left click** a zone header in the Quests category to bulk-hide or bulk-unhide all
-quests under it at once:
+quests under it:
 
 - If **any** quest under that header is currently hidden, Shift+click **unhides all** of them.
-- If **no** quests are hidden, Shift+click **hides all** of them.
+- If **none** are hidden, Shift+click **hides all** of them.
 
-This only works on regular zone headers in the Quests section. World Quests, Bonus
-Objectives, Scenario, and Achievement headers Shift+click normally (collapse/expand).
-The `(N Hidden)` count on the header updates immediately to reflect the change.
+The `(N Hidden)` count on the header updates immediately.
 
-**Campaign headers** also show a tooltip on hover with details about the current campaign
-chapter.
+**Campaign headers** show a tooltip on hover with the current chapter name and completion
+state.
+
+### Quest Tooltips
+
+Hovering over a quest tile shows a tooltip with reward previews — items, experience, money,
+and reputation. If **Show Party Quest Progress** is enabled and you are in a group, the
+tooltip also shows each party member's current progress on that quest.
 
 ---
 
 ## Categories
 
-The tracker can display up to five categories of content. Each can be assigned to any tracker
-window (see [Multiple Trackers](#multiple-trackers) below).
-
 | Category | What it shows |
 |---|---|
-| **Quests** | All normal quests in your quest log, grouped by zone and campaign. Always assigned to the Main Tracker and cannot be moved. |
-| **World Quests** | World quests available in the current zone. Optionally shows a live countdown timer on each title. |
+| **Quests** | All normal quests in your quest log, grouped by zone and campaign. Always on the Main Tracker. |
+| **World Quests** | World quests available in the current zone. Optional live countdown timer on each entry. |
 | **Bonus Objectives** | Bonus objective tasks active in your current area. |
-| **Scenario** | The current scenario or dungeon encounter tracker (stage name, objectives, progress bars). |
-| **Achievements** | Achievements you have manually set to track in the Achievements UI. |
+| **Scenario** | The current scenario or dungeon encounter: stage name, objectives, progress bars, and Mythic+ timer block. |
+| **Achievements** | Achievements you have set to track in the Achievements UI. |
 
-The vertical display order of categories within a tracker and the point at which separators
-are drawn can be adjusted in **Settings → Trackers → General → Category Display Order**.
+The vertical display order of categories and where separators are drawn can be changed under
+**Settings → Trackers → Category Display Order**.
 
 ---
 
 ## Multiple Trackers
 
-<!-- SCREENSHOT: Two trackers side by side, one with World Quests and one with Quests -->
-
-zQuestLog supports up to five simultaneous tracker windows: the **Main Tracker** (slot 0) and
-**Trackers 1 through 4**.
+zQuestLog supports up to five simultaneous tracker windows: the **Main Tracker** (slot 0)
+and **Trackers 1 through 4**.
 
 To set up an additional tracker:
 
-1. Open **Settings → Trackers → General**.
+1. Open **Settings → Trackers**.
 2. Under **Category Assignment**, use the dropdown next to a category (World Quests, Bonus
    Objectives, Scenario, or Achievements) to assign it to a tracker slot.
-3. The chosen tracker window will open automatically and display that category.
+3. The chosen tracker window opens automatically.
 
 Each tracker has its own position, size, scroll bar, background, and title bar — all
-configured independently under **Settings → Trackers → \[Tracker Name\]**.
+configured independently under **Settings → Trackers → [Tracker Name]**.
 
 Trackers can be anchored together using the [Tiling](#settings--tiling) system.
 
@@ -190,509 +179,535 @@ Trackers can be anchored together using the [Tiling](#settings--tiling) system.
 
 ## Quest Item Buttons
 
-<!-- SCREENSHOT: Quest row with an item button icon visible to the right of the title -->
-
-When a quest has a usable item (a "quest item" that appears on your action bar in the default
-UI), zQuestLog shows a clickable icon button for it directly in the tracker. You can use the
-item by clicking the button, and a cooldown swipe displays when the item is on cooldown.
-
-There are two ways these buttons can be displayed, controlled by **Show Inline** in
-**Settings → Appearance → Quest Items**.
+When a quest has a usable item, zQuestLog shows a clickable icon button for it. A cooldown
+swipe displays when the item is on cooldown. There are two display modes.
 
 ### Inline Mode (default)
 
 Item buttons appear directly to the right of the quest title inside the tracker window. They
-scroll with the content and clip to the visible scroll viewport, so they only appear when
-their quest row is on screen.
+scroll with the content.
 
 ### Panel Mode
 
-When **Show Inline** is turned off, each tracker gets a dedicated floating panel that holds
-all of that tracker's item buttons grouped together. The panel can be:
+When **Show Inline** is turned off, each tracker gets a dedicated floating panel for its
+item buttons. The panel can be:
 
-- **Anchored** to any of 8 positions around its tracker window (right, left, above, below,
-  and the four corners)
-- **Free-floating** — drag it anywhere and the position is saved
-- Set to follow a **tile group's root or last tracker** instead of its own window
+- **Anchored** to any of 8 positions around the tracker window
+- **Free-floating** — drag it anywhere, and the position is saved
 
-Buttons stack inside the panel in a direction of your choice, and the panel has its own
-optional background texture and border.
+Buttons stack in a configurable direction, and the panel has its own optional background
+and border.
 
 ### Quest Numbering
 
-In panel mode you can enable **Denote Which Quest**, which places a small numbered badge
-both on each item button and on the quest's title row in the tracker. Since the buttons live
-outside the tracker in a separate panel, this lets you quickly match a button to its quest
-without hovering. Numbers are stable across sessions.
+In panel mode, **Show Quest Numbering** places a small numbered badge on each item button
+and on the corresponding quest title row. Because the panel lives outside the tracker window,
+this lets you match a button to its quest at a glance. Assigned numbers are stable across
+sessions.
 
 ### Combat Behavior
 
-Because the game restricts changes to clickable action buttons while in combat, item buttons
-won't move, update, or change their assigned item during a fight. They stay in place and keep
-their last-set item for the duration of combat. You can still click and use them normally
--- updates just take effect once combat ends.
+Item buttons will not move, update, or re-assign their item during combat. They hold their
+last state for the duration of the fight. You can still click and use them normally — updates
+take effect when combat ends.
+
+---
+
+## Slash Commands
+
+| Command | Description |
+|---|---|
+| `/zql options` | Open the settings panel. |
+| `/zql lock` | Toggle frame lock. Prevents all tracker windows from being dragged or resized. |
+| `/zql show <0-4>` | Show a tracker window by ID (0 = Main Tracker). |
+| `/zql listtrackers` | Print all active trackers and their assigned categories to chat. |
+| `/zql refresh` | Force-rebuild all active tracker windows. |
+| `/zql info` | Print addon version and credits to chat. |
+| `/zql debug` | Toggle debug mode. |
 
 ---
 
 ## Settings — General
 
-Open with `/zql` then click the **General** tab.
+Open with `/zql options` then click the **General** tab.
 
-### Display
+The General tab has a root set of toggles plus two sub-sections, **Sorting** and
+**Tracking**, accessible from the sidebar.
+
+### Root Toggles
 
 | Setting | Description |
 |---|---|
-| **Lock All Frames** | Prevents all tracker windows from being dragged. |
-| **Hide Default Tracker** | Hides the built-in WoW objective, scenario, and achievement tracker so it does not overlap zQuestLog. |
-| **Show User-Hidden Quests** | Globally shows or hides quests you have Shift+clicked to hide. Same as the eye toggle on each tracker. |
-| **Show World Quests** | Enables world quest display in the World Quests category. |
-| **Show WQ Duration** | Appends a live `[HH:MM:SS]` countdown on each world quest title. Refreshes every 500 ms while active. |
-| **Show Quest Level** | Shows a `[level]` bracket before each quest title. On by default. |
-| **Show Bonus Objectives** | Enables bonus objective display in the Bonus Objectives category. |
-| **Show Completed Achievement Objectives** | Shows criteria that are already completed when displaying tracked achievements. |
-| **Hide Completed Objectives** | Hides numbered "X/Y" objectives once the line reads *(Done)*. Text-only objectives are always shown. |
+| **Lock All Frames** | Prevents all tracker windows from being dragged or resized. |
+| **Smooth Scrolling** | Animates scroll movement to glide to each new position instead of jumping. |
+| **Show Default Tracker** | Shows or hides the built-in WoW objective tracker. |
+| **Show User-Hidden Quests** | Globally shows quests you have Shift+clicked to hide. Same as the eye toggle on each title bar. |
 | **Dungeon Quest Filter** | When inside a dungeon, hides quests unrelated to the current instance. Also available as a title bar toggle. |
+| **Pixel Perfect Scale** | Scales tracker windows to align with the physical pixel grid, improving sharpness on high-DPI displays. |
+| **Show Party Quest Progress** | When in a group, adds each party member's current progress on the hovered quest to its tooltip. |
+| **Show TomTom Waypoint** | When TomTom is loaded, super-tracking a quest also sets a TomTom arrow for its next objective. Only visible when TomTom is active. |
 
-### Sorting and Tracking
-
-| Setting | Description |
-|---|---|
-| **Sort Nearest Quests** | Re-orders quests by proximity to your character. Campaign quests always stay at the top. The zone header with the closest quest floats to the top, and quests within each zone are sorted closest-first. Mutually exclusive with Current Zone First. |
-| **Auto Track Nearest Quest** | Automatically super-tracks the closest quest that has a known map location. Runs on its own separate timer. |
-| **Current Zone First** | Moves the zone header that matches your current in-game zone to the top of the quest list. Campaign headers always remain above it. Has no effect if there are no quests under your current zone's header. Mutually exclusive with Sort Nearest Quests — enabling one disables the other. |
-| **Sort Nearest Poll Rate** | How often (in seconds, 1–15) the distance sort re-evaluates. Default: 2 s. |
-| **Auto Track Poll Rate** | How often (in seconds, 1–15) the auto-track re-evaluates which quest is closest. Default: 6 s. |
-
-### Campaigns
-
-| Setting | Description |
-|---|---|
-| **Track Old Campaigns** | When enabled, quests from older expansion campaigns are grouped under their own campaign headers instead of appearing as regular zone quests. This is an experimental feature — a confirmation dialog will appear before it takes effect. |
-
-### Resets
-
-- **Reset General Settings** — restores all settings on this tab to their defaults.
+**Resets:**
+- **Reset General Settings** — restores all root General settings to their defaults.
 - **Reset Hidden Quests** — permanently clears your per-character list of Shift+hidden quests.
-- **Show Debug Messages** — prints internal event and layout debug output to the chat window. Useful for troubleshooting.
+
+---
+
+### General > Sorting
+
+Click **Sorting** in the sidebar under the General tab.
+
+| Setting | Description |
+|---|---|
+| **Use Blizzard Quest Order** | Zone headers follow Blizzard's quest log ordering instead of alphabetical. Sorting modifiers (zone-first, nearest) still apply on top. |
+| **Current Zone First** | Moves the zone header matching your current zone to the top of the quest list. Campaign headers always appear above it. |
+| **Current Quest Area** | Groups quests whose objective area you are currently standing in under a *Current Area* header below campaigns. Highlights quests immediately relevant to your position. |
+| **Area Above Campaigns** | Moves the Current Area section above campaign headers. Only available when Current Quest Area is on. |
+| **Sort Nearest Quests** | Re-orders quests by proximity: the zone with the closest quest floats first, and quests within each zone sort closest-first. Campaign headers remain at the top. |
+| **Use Polling** | Enables a fixed-interval distance check rather than relying on event-driven updates alone. Only available when Sort Nearest Quests is on. |
+| **Sort Nearest Poll Rate** | How often (1–30 seconds) the distance sort re-evaluates when polling is on. Default: 2 s. |
+
+**Reset:** **Reset Sorting** — restores all Sorting settings to defaults.
+
+---
+
+### General > Tracking
+
+Click **Tracking** in the sidebar under the General tab.
+
+| Setting | Description |
+|---|---|
+| **Track Old Campaigns** | Groups quests from older expansion campaigns under their own campaign headers instead of treating them as regular zone quests. A confirmation dialog appears before the change takes effect. |
+| **Show Mythic+ Info** | Displays the keystone timer, death count, and active affixes below the Scenario tracker when a Mythic+ key is in progress. |
+| **Auto Track Nearest Quest** | Automatically super-tracks the closest quest that has a known map location. Runs on its own separate timer. |
+| **Use Polling** | Enables a fixed-interval check for the nearest quest rather than relying on events alone. Only available when Auto Track Nearest Quest is on. |
+| **Auto Track Poll Rate** | How often (1–30 seconds) auto-track re-evaluates when polling is on. Default: 6 s. |
+
+#### Tracked Glow
+
+Controls the visual indicator on the currently super-tracked quest's title row.
+
+| Setting | Description |
+|---|---|
+| **Show Super Track Indicator** | Appends a gold `<<` marker after the super-tracked quest's title. |
+| **Show Super Track Glow** | Draws a color glow behind the super-tracked quest's title row. |
+| **Super Track Glow Color** | Color and opacity of the glow. |
+
+#### Tracked Elements
+
+Controls which supplementary data lines appear for tracked quests.
+
+| Setting | Description |
+|---|---|
+| **Show Quest Level** | Displays a `[level]` bracket before each quest title. |
+| **Show Completed Objectives** | Shows objectives that are already marked *(Done)*. When off, completed objectives are hidden. |
+| **Location Hint** | Shows routing hints on all quests. When off, the hint only appears on the currently super-tracked quest. |
+| **Show Completed Criteria** | Shows achievement criteria that have already been completed. |
+| **Show WQ Duration** | Shows a live countdown timer on each World Quest title. |
+
+**Resets:** Reset Tracking Settings, Reset Tracked Glow, Reset Tracked Elements.
 
 ---
 
 ## Settings — Trackers
 
-Open with `/zql` then click the **Trackers** tab. It contains several sub-tabs.
+Open with `/zql options` then click the **Trackers** tab.
 
-### General Sub-Tab
+### Category Assignment
 
-**Category Assignment** — for each content category (World Quests, Bonus Objectives,
-Scenario, Achievements) select which tracker slot should display it, or *None* to disable it
-entirely. Quests are always on the Main Tracker and cannot be reassigned.
+The root content of the Trackers tab lets you assign categories to tracker slots.
 
-**Category Display Order** — use the up (▲) and down (▼) arrows to change the vertical order
-categories appear in all trackers.
+- **Quests** is permanently assigned to the Main Tracker.
+- **World Quests**, **Bonus Objectives**, **Scenario**, and **Achievements** each have a
+  dropdown to assign them to the Main Tracker, Tracker 1–4, or *None* to disable them.
 
-### Per-Tracker Sub-Tabs (Main Tracker, Tracker 1–4)
+**Category Display Order** — drag entries to change the vertical order categories appear
+across all trackers. The default order is: Scenario → World Quests → Bonus Objectives →
+Quests → Achievements.
 
-Each tracker has its own settings page.
+### Per-Tracker Sub-Tabs
+
+A sub-tab appears for each active tracker (Main Tracker, Tracker 1–4). Tracker slots with
+no assigned categories are hidden from the list.
 
 #### Visibility
 
 | Setting | Description |
 |---|---|
-| **Show Tracker** | Shows or hides this tracker window. Disabled when the tracker has no categories assigned. |
+| **Show Tracker** | Shows or hides this tracker window. Disabled when no categories are assigned. |
 | **Addon in Title** | Includes the text *zQuestLog* in the title bar. |
 | **Categories in Title** | Shows short category abbreviations in the title bar. |
 | **Show Scroll Bar** | Displays a scroll bar when content overflows the window height. |
-| **Hide When Empty** | Automatically hides the tracker when it has no content. Reappears as soon as content appears. |
-| **Hide in Instance** | Hides this tracker window while inside any dungeon, raid, or instance. |
+| **Show When Empty** | When enabled (the default), the tracker remains visible even when it has no content. Disable this to auto-hide the tracker when empty and reappear when content exists. |
+| **Show in Instance** | When enabled (the default), the tracker is visible inside dungeons and raids. |
 
-#### Size and Direction
+#### Size and Growth
 
 | Setting | Description |
 |---|---|
-| **Dynamic Width** | Resizes the window width automatically to fit the longest line of text. |
+| **Dynamic Width** | Resizes the window width automatically to fit the longest content line. |
 | **Dynamic Height** | Resizes the window height automatically to fit all tracked entries. |
-| **Max Window Width** | Upper limit on window width (100–2000 px), applied to both dynamic sizing and manual drag-resize. |
+| **Expand Left** | When Dynamic Width grows the window, it expands toward the left. Only available when Dynamic Width is on. |
+| **Expand Up** | When Dynamic Height grows the window, it expands upward. Only available when Dynamic Height is on. |
+| **Max Window Width** | Upper limit on window width (100–2000 px). |
 | **Max Window Height** | Upper limit on window height (100–2000 px). |
-| **Min Window Width** | Lower limit on window width (50–1000 px); also sets the resize-drag minimum. |
+| **Min Window Width** | Lower limit on window width (50–1000 px). |
 | **Min Window Height** | Lower limit on window height (50–1000 px). |
-| **Expand Left** | When Dynamic Width grows the window, it expands toward the left instead of the right. Only available when Dynamic Width is on. |
-| **Expand Up** | When Dynamic Height grows the window, it expands upward instead of downward. Only available when Dynamic Height is on. |
 
 #### Background
 
 | Setting | Description |
 |---|---|
-| **Background Texture** | The texture used for the tracker window background (populated from LibSharedMedia). |
-| **Color Overlay** | Enables a color tint drawn on top of the background texture. |
-| **Overlay Color** | The color and opacity of that tint. Only available when Color Overlay is on. |
+| **Background Texture** | The texture for the tracker window background (LibSharedMedia supported). |
+| **Color Overlay** | Enables a color tint layered on top of the background texture. |
+| **Overlay Color** | Color and opacity of that tint. Only available when Color Overlay is on. |
 
 #### Resets
 
-- **Reset Tracker Appearance** — restores size, max/min, and expand direction to defaults.
-- **Reset Tracker Position** — moves the tracker back to its default screen position.
-- **Reset Background** — restores background texture and overlay to defaults.
+- **Reset Tracker Appearance** — restores size limits and growth direction to defaults.
+- **Reset Tracker Position** — moves this tracker to its default screen position.
+- **Reset Background** — restores the background texture and overlay to defaults.
 
 ---
 
 ## Settings — Tiling
 
-<!-- SCREENSHOT: Two trackers tiled vertically with the tiling icon visible in the title bar -->
+The tiling system lets tracker windows anchor to each other so they reposition as a group
+and optionally match each other's dimensions.
 
-The tiling system lets tracker windows be anchored to each other so they move together and
-can optionally match each other's dimensions.
-
-Open with `/zql` then click the **Tiling** tab.
+Open with `/zql options` then click the **Tiling** tab.
 
 ### Global Settings
 
 | Setting | Description |
 |---|---|
-| **Enable Tiling System** | Master toggle for the entire tiling system. Disabling it via the confirmation dialog detaches all trackers and restores their saved pre-tiling positions. |
-| **Match Greatest Width** | All trackers in a tile group resize to match the widest currently-visible member. Overrides per-tracker Match Width. |
-| **Match Greatest Height** | All trackers in a tile group resize to match the tallest currently-visible member. Overrides per-tracker Match Height. |
-| **Constrict Height to Root** | Caps the combined vertical height of a tile group to the root tracker's Max Height. Requires the root to have Dynamic Height enabled. |
+| **Enable Tiling System** | Master toggle. Disabling it via the confirmation dialog detaches all trackers and restores their saved pre-tiling positions. |
+| **Match Greatest Width** | All trackers in a tile group resize to match the widest visible member. |
+| **Match Greatest Height** | All trackers in a tile group resize to match the tallest visible member. |
+| **Constrict Height to Root** | Caps the combined vertical height of a tile group to the root tracker's Max Height. Requires the root tracker to have Dynamic Height enabled. |
 
-### Per-Tracker Tiling Settings
-
-Each tracker slot has its own tiling sub-section.
+### Per-Tracker Tiling (Main Tracker, Tracker 1–4)
 
 | Setting | Description |
 |---|---|
-| **Enable Tiling** | Anchors this tracker's position relative to a chosen parent tracker. |
-| **Parent Tracker** | Which tracker this tracker attaches to. Cannot create circular chains. |
-| **Parent Anchor** | The attachment point on the parent tracker (e.g. *Bottom Left*, *Top Right*). |
-| **Anchor Point** | The corresponding attachment point on this tracker. |
-| **Offset X / Y** | A pixel offset applied on top of the anchor position. Useful for adding or removing gaps between tiled trackers. |
-| **Match Width** | Resizes this tracker to match its parent's width. |
-| **Match Height** | Resizes this tracker to match its parent's height. |
+| **Enable Tiling** | Anchors this tracker's position relative to a chosen parent tracker. Disabled when the global tiling system is off. |
+| **Parent Tracker** | Which tracker this tracker attaches to. Circular chains are not allowed. |
+| **Parent Anchor** | The attachment point on the parent tracker (9 positions). |
+| **Child Anchor** | The attachment point on this tracker that snaps to the parent anchor point. |
+| **Offset X / Y** | A pixel offset applied on top of the anchor. Useful for adding a gap between stacked trackers. |
+| **Match Parent Width** | Resizes this tracker to match its parent's current width. |
+| **Match Parent Height** | Resizes this tracker to match its parent's current height. |
 
-> **Tip:** A common setup is to tile the World Quests tracker to the bottom of the Main
-> Tracker with *BOTTOMLEFT → TOPLEFT*, so they stack vertically and scroll independently.
+> **Tip:** A common setup is to tile the World Quests tracker below the Main Tracker using
+> *BOTTOMLEFT → TOPLEFT* so they stack vertically and scroll independently.
 
 ---
 
 ## Settings — Appearance > Fonts
 
-Open with `/zql` → **Appearance** → **Fonts**.
+Open with `/zql options` → **Appearance** → **Fonts**.
 
-Controls the font size, face, and rendering style for each text type.
+### General
 
-### Font Sizes
-
-| Setting | Description |
-|---|---|
-| **Header Size** | Font size for zone/category header lines (5–32). |
-| **Title Size** | Font size for quest and achievement title lines (5–32). |
-| **Objective Size** | Font size for objective and criteria lines (5–32). |
-
-### Font Faces
-
-Each of the three text types (Header, Title, Objective) has a dropdown that lists every font
-registered with LibSharedMedia, including any fonts added by other addons.
-
-### Rendering Style
-
-Each text type also has a rendering dropdown:
-
-| Option | Effect |
-|---|---|
-| **None** | Smooth, no outline (default). |
-| **Outline** | Thin black outline. |
-| **Thick Outline** | Heavier black outline. |
-| **Monochrome** | Stops anti-aliasing; sharp pixel font with no gray edges. |
-| **Outline + Monochrome** | Thin outline with no anti-aliasing. |
-| **Thick Outline + Monochrome** | Heavy outline with no anti-aliasing. |
-
-### Resets
-
-**Reset Header Font**, **Reset Title Font**, and **Reset Objective Font** each restore the
-corresponding face and rendering flag back to *Friz Quadrata TT* at the default size.
-
-### Campaigns
-
-Campaign headers and chapter sub-lines have their own font section below the main controls.
+Each of the three text types (Header, Title, Objective) has its own size, font face, and
+rendering controls.
 
 | Setting | Description |
 |---|---|
-| **Campaign Header Size / Font / Rendering** | Font controls for campaign name header lines. |
-| **Chapter Size / Font / Rendering** | Font controls for the chapter sub-line beneath each campaign header. |
+| **Header / Title / Objective Font Size** | Point size for zone headers, quest titles, and objective lines respectively (5–32). |
+| **Font Face** | Font face for each type, populated from LibSharedMedia. Default: Friz Quadrata TT. |
+| **Font Flags** | Rendering style: None, Outline, Thick Outline, Monochrome, Outline + Monochrome, or Thick Outline + Monochrome. |
 
-Separate **Reset Campaign Header Fonts** and **Reset Campaign Chapter Fonts** buttons restore
-each group to defaults.
+**Resets:** Reset Header Font, Reset Title Font, Reset Objective Font — each restores its
+section independently.
+
+### Campaign Fonts
+
+Campaign headers and their chapter sub-lines have their own separate font controls:
+
+| Setting | Description |
+|---|---|
+| **Campaign Header Size / Font / Font Flags** | Font controls for the campaign name header line. |
+| **Campaign Chapter Size / Font / Font Flags** | Font controls for the chapter sub-line beneath each campaign header. |
+
+**Resets:** Reset Campaign Header Fonts, Reset Campaign Chapter Fonts.
+
+### Progress and Timer Bar Fonts
+
+Progress bars and timer bars each have their own font size, face, and rendering controls,
+plus X and Y label offsets and anchor positions for fine-tuning label placement.
+
+**Resets:** Reset Progress Bar Font, Reset Timer Bar Font.
 
 ---
 
 ## Settings — Appearance > Style
 
-Open with `/zql` → **Appearance** → **Style**.
+Open with `/zql options` → **Appearance** → **Style**.
 
 ### UI Elements
 
-The accent color is used for the title bar text, the thin border line, the scroll bar thumb,
-checkbox fills, and the quest count label.
-
 | Setting | Description |
 |---|---|
-| **Use Class Color** | Sets the accent to your character's class color automatically. |
-| **UI Accent Color** | Custom color and opacity. Disabled when Use Class Color is on. |
 | **Show Button Backdrop** | Shows a border and background behind each title bar button. |
+| **Auto-Hide Title Buttons** | Hides the title bar buttons until you hover over the title bar. |
+| **Use Class Color** | Sets the UI accent color to your character's class color automatically. |
+| **UI Color** | Custom accent color used for title text, scroll bar thumb, borders, and UI controls. Disabled when Use Class Color is on. |
 
-### Scroll and Progress Bars
-
-| Setting | Description |
-|---|---|
-| **Smooth Scrolling** | When on, scrolling animates smoothly to each new position instead of jumping. |
-| **Progressbar Percent** | When on (default), shows the completion percentage centered on each progress bar. The percentage is removed from the objective text below the bar so it isn't shown twice. |
-
-> The scroll bar visibility toggle is per-tracker and lives under **Settings → Trackers → [Tracker Name]**.
-
-### Tracked Glow
-
-When a quest is super-tracked (arrow/minimap pin is active), zQuestLog can visually highlight
-that quest's title row.
+### Quest Icons
 
 | Setting | Description |
 |---|---|
-| **Show Tracked Indicator** | Appends a gold `<<` marker after the super-tracked quest's title. |
-| **Show Tracked Glow** | Draws a color glow behind the super-tracked quest's title row. |
-| **Glow Color** | The color and opacity of that glow. |
+| **Show Quest Icon** | Shows an icon to the left of each quest title. |
+| **Native Quest Icon Style** | Uses the default WoW quest icon style instead of the custom style. |
+| **Quest Icon Size** | Size of the icon in pixels (8–64). |
+| **Quest Icon Y-Offset** | Vertical offset for fine-tuning the icon's position (-20–20). |
 
-<!-- SCREENSHOT: Super-tracked quest with the glow and << indicator -->
+### Progress and Timer Bars
+
+| Setting | Description |
+|---|---|
+| **Progress Bar Percent** | Shows the completion percentage centered on each progress bar and omits it from the objective text below. |
+| **Achievement Bar Percent** | Shows the completion percentage on achievement progress bars. |
+| **Progress Bar Height** | Height of objective progress bars in pixels (4–32). |
+| **Progress Bar Texture** | The statusbar texture for objective progress bars (LibSharedMedia supported). |
+| **Enable Timer Bar** | Shows a timer bar beneath quests with an active countdown. |
+| **Timer Bar Height** | Height of the timer bar in pixels (4–32). |
+| **Timer Bar Texture** | The statusbar texture for the timer bar (LibSharedMedia supported). |
 
 ### Separator
 
-A decorative divider line can be drawn between category sections and below campaign groups.
-
 | Setting | Description |
 |---|---|
-| **Show Category Separators** | Draws a separator between the Scenario, Quest, and Achievement sections. |
-| **Use Texture** | Uses a texture graphic for the separator instead of a plain line. |
-| **Use Border List** | Browse border textures instead of statusbar textures when picking the separator graphic. |
-| **Separator Texture** | The specific statusbar or border texture to use. |
-| **Use Class Color** | Colors the separator graphic with your class color. |
-| **Overlay Color** | Custom color and opacity for the separator graphic. Disabled when Use Class Color is on. |
-| **Show Campaign Separator** | Draws a separator line below each campaign quest group. |
-| **Show Between Campaigns** | Draws an additional separator line between individual campaign groups. Only available when Show Campaign Separator is on. |
+| **Show Category Separators** | Draws a dividing line between content sections (e.g. between the Scenario block and the Quest list). |
+| **Use Texture** | Uses a texture graphic instead of a plain line. |
+| **Use Border Texture** | Browse border textures instead of statusbar textures when picking the separator graphic. Only available when Use Texture is on. |
+| **Separator Texture / Border** | The texture to use for the separator. |
+| **Class Color Separator** | Colors the separator with your class color. |
+| **Separator Color** | Custom color and opacity. Disabled when Class Color Separator is on. |
+| **Show Campaign Separator** | Draws a separator below each campaign quest group. |
+| **Show Between Campaigns** | Draws an additional separator between individual campaign groups. Only available when Show Campaign Separator is on. |
+
+**Resets:** Reset UI Elements, Reset Quest Icons, Reset Bars, Reset Separator.
 
 ---
 
 ## Settings — Appearance > Colors
 
-Open with `/zql` → **Appearance** → **Colors**. Split into two sub-tabs: **Quests** and **Others**.
+Open with `/zql options` → **Appearance** → **Colors**. Split into two sub-tabs: **Quests**
+and **Others**.
 
-### Quests Sub-Tab
+### Quests Tab
 
 **Quest Colors**
 
 | Color | What it applies to |
 |---|---|
-| **Header** | Zone and campaign header text. |
-| **Objective** | In-progress objective text. |
+| **Quest Header** | Zone and category header text. |
+| **Objective Color** | In-progress objective text. |
 | **Completed Objective** | Objective text for objectives marked *(Done)*. |
-| **Color by Difficulty** | Automatically colors quest titles: mage-blue for quests ready to turn in, orange for in-progress quests. When this is on the Quest Title picker below is ignored. |
-| **Quest Title** | Quest title text when Color by Difficulty is off. |
-| **Completed Title** | Quest title text when the quest is ready to turn in (used in both modes). |
+| **Color by Difficulty** | Automatically colors quest titles based on relative difficulty and completion state. When on, disables the Quest Title color picker. |
+| **Quest Title** | Quest title text. Disabled when Color by Difficulty is on. |
+| **Completed Quest Title** | Quest title text when the quest is ready to turn in. |
 
 **Campaign Colors**
 
-| Setting | What it applies to |
+| Color | What it applies to |
 |---|---|
-| **Campaign Header** | The campaign name header text. |
-| **Campaign Chapter** | The chapter sub-line shown beneath a campaign header. |
+| **Campaign Header** | Campaign name header text. |
+| **Campaign Chapter** | Chapter sub-line beneath each campaign header. |
 
-**World Quest Colors**
+**World Quest Colors** — WQ Header, WQ Title, WQ Objective, and WQ Completed Objective.
 
-Controls the **Header**, **World Quest Title**, **Objective**, and **Completed Objective**
-text colors for the World Quests section.
+**Bonus Objective Colors** — Bonus Header, Bonus Title, Bonus Objective, and Bonus Completed
+Objective.
 
-**Bonus Objective Colors**
+**Resets:** Reset Quest Colors, Reset World Quest Colors, Reset Bonus Objective Colors.
 
-Controls the **Header**, **Bonus Objective Title**, **Objective**, and **Completed Objective**
-text colors for the Bonus Objectives section.
+### Others Tab
 
-**Resets**
+> **Note:** This tab is hidden when **Color by Difficulty** is on. It reappears when Color
+> by Difficulty is turned off.
 
-Individual reset buttons for Quest Colors, World Quest Colors, and Bonus Objective Colors.
-
----
-
-### Others Sub-Tab
-
-**Achievement Colors**
-
-Controls the **Header**, **Achievement Title**, and **Objective** text colors for the
-Achievements section.
+**Achievement Colors** — Achievement Header, Achievement Title, and Achievement Objective.
 
 **Scenario Colors**
 
 | Color | What it applies to |
 |---|---|
-| **Header** | The Scenario Tracker section header. |
-| **Stage / Dungeon Name** | The current stage or dungeon name line. |
-| **Objective** | Scenario objective text. |
-| **Completed Objective** | Scenario objective text when completed. |
+| **Scenario Header** | The Scenario section header. |
+| **Scenario Stage** | The current stage or dungeon name line. |
+| **Scenario Objective** | Scenario objective text. |
+| **Scenario Completed** | Scenario objective text when completed. |
 
 **Progress Bar Colors**
 
 | Color | What it applies to |
 |---|---|
-| **Progress Bar Fill** | The filled portion of progress bars (supports opacity). |
-| **Progress Bar Segments** | The tick-mark divider lines on progress bars (supports opacity). |
-| **Progress Bar Background** | The unfilled background of progress bars (supports opacity). |
+| **Completion Color** | The color the bar changes to when the objective is complete. |
+| **Progress Fill** | The filled portion of progress bars. |
+| **Progress Segment** | The tick-mark dividers on progress bars. |
+| **Progress Background** | The unfilled background of progress bars. |
 
-**Resets**
+**Timer Bar Colors**
 
-Individual reset buttons for Achievement Colors, Scenario Colors, and Progress Bar Colors.
+| Color | What it applies to |
+|---|---|
+| **Timer Completion Color** | The color the bar changes to when the timer expires. |
+| **Timer Fill** | The filled portion of the timer bar. |
+| **Timer Segment** | The tick-mark dividers on the timer bar. |
+| **Timer Background** | The unfilled background of the timer bar. |
+
+**Resets:** Reset Achievement Colors, Reset Scenario Colors, Reset Progress Bar Colors,
+Reset Timer Bar Colors.
 
 ---
 
 ## Settings — Appearance > Spacing
 
-Open with `/zql` → **Appearance** → **Spacing**.
+Open with `/zql options` → **Appearance** → **Spacing**. All values are in pixels, 0–30 in
+0.5-pixel steps.
 
-All spacing values are in pixels, ranging from 0 to 30 in 0.5-pixel steps.
+| Group | Description |
+|---|---|
+| **Tracked Header** | Gap above and below each zone or category header row. |
+| **Campaign Header** | Gap above and below each campaign name header row. |
+| **Campaign Chapter** | Gap above and below each chapter sub-line. A separate **Pad First Chapter Title** toggle adds extra top padding to the first chapter of a campaign. |
+| **Tracked Title** | Gap above and below each quest, world quest, bonus objective, or achievement title row. |
+| **Tracked Objective** | Gap above and below each objective or criteria row. |
+| **Object Buffer** | Extra gap between the last objective of one entry and the title of the next. |
+| **Header Buffer** | Extra gap pushed before a zone header when other content already precedes it. |
+| **Separator** | Gap above and below the category separator line. |
+| **Progress Bar** | Gap above and below each progress bar row. |
 
-| Group | Top / Bottom | Description |
-|---|---|---|
-| **Tracked Header** | Both | Pixel gap above and below each zone/category header row. |
-| **Campaign Header** | Both | Pixel gap above and below each campaign name header row. |
-| **Campaign Chapter** | Both | Pixel gap above and below each campaign chapter sub-line. |
-| **Tracked Title** | Both | Pixel gap above and below each quest, world quest, bonus objective, or achievement title row. |
-| **Tracked Objective** | Both | Pixel gap above and below each objective or achievement criteria row. |
-| **Tracked Object Buffer** | Single | Extra gap inserted between the last objective of one entry and the title of the next. Useful for visually separating quests when padding alone is not enough. |
-| **Tracked Header Buffer** | Single | Extra gap pushed before a zone header when content already precedes it. |
-| **Separator** | Both | Pixel gap above and below the category separator line. |
-| **Progress Bar** | Both | Pixel gap above and below each progress bar row. |
-
-Use **Reset Spacing** to restore all spacing values to their defaults at once.
+Individual reset buttons are available for each group.
 
 ---
 
 ## Settings — Appearance > Quest Items
 
-Open with `/zql` → **Appearance** → **Quest Items**.
+Open with `/zql options` → **Appearance** → **Quest Items**.
 
-> **Note:** All settings on this tab are disabled during combat.
+> Item button settings are disabled during combat.
+
+### Core Settings
 
 | Setting | Description |
 |---|---|
-| **Show Quest Items** | Master toggle. Shows a clickable icon button for any quest that has a usable quest item. |
-| **Show Inline** | When on (default), item buttons appear next to the quest title inside the tracker window and scroll with the content. When off, buttons are moved to a separate floating panel. |
-| **Show When Minimized** | When on (default), item buttons remain visible when the tracker is minimized. When off, buttons hide while the tracker is collapsed. |
+| **Show Quest Items** | Master toggle. Shows clickable icon buttons for quests that have a usable item. |
+| **Show Inline** | When on (default), item buttons appear beside the quest title inside the tracker. When off, buttons move to a floating panel. |
+| **Show When Minimized** | When on (default), the floating panel stays visible when the tracker window is minimized. Only shown when **Show Inline** is off. |
 
 ### Floating Panel
 
-These settings appear when **Show Inline** is turned off.
+These settings appear when **Show Inline** is off.
 
 | Setting | Description |
 |---|---|
-| **Attach To** | Which tracker window the panel follows: *Main Tracker* or *Free Float* (drag anywhere, position saved). |
-| **Anchor Point** | Which edge or corner of the target tracker the panel snaps to. Choose from 8 positions: Right (Top/Bottom), Left (Top/Bottom), Top (Left/Right), Bottom (Left/Right). Hidden when Attach To is set to Free-Floating. |
-| **Growth Direction** | The direction buttons stack inside the panel. *Auto* picks a sensible default based on the anchor; or choose Down, Up, Left, or Right explicitly. |
-| **Button Size** | Size of each item button in pixels (1–512). |
-| **Button Padding** | Space between the panel edge and the buttons in pixels (0–32). |
+| **Attach Mode** | Which tracker the panel follows, or *Free Float* to drag it anywhere (position saved). |
+| **Anchor Side** | Which edge or corner of the target tracker the panel snaps to (8 positions). Hidden when free-floating. |
+| **Growth Direction** | Direction buttons stack inside the panel: Auto, Down, Up, Left, or Right. |
+| **Scale** | Scale of the entire floating panel as a percentage (1–512). |
+| **Padding** | Space between items in the panel (0–32 px). |
 
 ### Panel Background
 
 | Setting | Description |
 |---|---|
-| **Show Background** | Draws a background texture behind the floating panel. |
+| **Enable Background** | Draws a background texture behind the floating panel. |
 | **Background Texture** | The texture to use (LibSharedMedia supported). |
-| **Color Overlay** | Applies a color tint on top of the background texture. |
-| **Overlay Color** | Color and opacity of that tint. Only available when Color Overlay is on. |
+| **Color Overlay** | Applies a color tint on top of the texture. |
+| **Overlay Color** | Color and opacity of that tint. Disabled when Color Overlay is off. |
 
 ### Panel Border
 
 | Setting | Description |
 |---|---|
-| **Show Border** | Draws a border around the floating panel. |
-| **Border Thickness** | Thickness of the border in pixels (1–4). |
-| **Use UI Color** | Colors the border with the current UI accent color instead of a custom color. |
-| **Border Color** | Color and opacity of the border. Disabled when Use UI Color is on. |
+| **Enable Border** | Draws a border around the floating panel. |
+| **Border Thickness** | Thickness in pixels (1–4). |
+| **Use UI Color** | Colors the border with the current UI accent color. |
+| **Border Color** | Custom color and opacity. Disabled when Use UI Color is on or border is off. |
 
 ### Quest Numbering
 
+These settings are only visible when **Show Inline** is off.
+
 | Setting | Description |
 |---|---|
-| **Denote Which Quest** | Shows a small numbered badge on each item button and on its corresponding quest title row in the tracker. Useful when the panel is floating away from the tracker and you need to match buttons to quests at a glance. Numbers are stable and persist across sessions. |
-| **Badge Size** | Size of the numbered badge on the item button in pixels (8–32). |
-| **Icon Size (Inline)** | Size of the numbered icon embedded in the quest title text in pixels (8–32). |
-| **Badge Attach Point** | Where the badge sits relative to its item button — 8 positions outside the button or 4 corner overlays on top of it. |
+| **Show Quest Numbering** | Places a small numbered badge on each item button and on the corresponding quest title row, so you can match panel buttons to their quests at a glance. |
+| **Denote Size** | Size of the numbered badge on the item button (8–32 px). |
+| **Denote Attach Point** | Where the badge sits relative to the item button — 8 outside positions or 4 corner overlays. |
 
-### Resets
-
-- **Reset Quest Item Panel** — restores all settings on this tab to their defaults.
+**Reset:** **Reset Quest Items** — restores all settings on this tab to defaults.
 
 ---
 
 ## Settings — Sounds
 
-Open with `/zql` then click the **Sounds** tab.
+Open with `/zql options` then click the **Sounds** tab.
 
-zQuestLog can play a sound for three different quest events. All sound pickers use
-LibSharedMedia and preview the selected sound immediately when you choose it.
+All sound pickers use LibSharedMedia and preview the selected sound immediately on selection.
 
 | Section | Setting | Description |
 |---|---|---|
-| **Objective Increment** | Enable Objective Increment Sound | Plays a sound when a quest objective makes partial progress (e.g. 3/10 → 4/10). |
-| | Objective Increment Sound | The sound to play. |
-| **Objective Complete** | Enable Objective Complete Sound | Plays a sound when a single objective finishes but the quest itself is still in progress. |
-| | Objective Complete Sound | The sound to play. |
-| **Quest Completion** | Enable Quest Sound | Plays a sound when all objectives of a quest are done (ready to turn in). |
-| | Quest Sound | The sound to play. |
+| **Objective Increment** | Enable | Plays a sound when a quest objective makes partial progress (e.g. 3/10 → 4/10). |
+| | Sound | The sound to play. |
+| **Objective Complete** | Enable | Plays a sound when a single objective finishes but the quest is still in progress. |
+| | Sound | The sound to play. |
+| **Quest Completion** | Enable | Plays a sound when all objectives of a quest are done. |
+| | Sound | The sound to play. |
+
+**Reset:** **Reset Sounds** — restores all sound settings to defaults.
 
 ---
 
 ## Settings — Profiles
 
-Open with `/zql` then click the **Profiles** tab.
+Open with `/zql options` then click the **Profiles** tab.
 
-Profiles store all settings (except window position, which is saved per character) and are
-shared account-wide. You can maintain separate profiles for different characters or
-playstyles.
+Profiles store all settings account-wide. Window positions are saved per character separately
+and are not included in profiles.
 
-### Switching and Creating Profiles
+### Active Profile
 
 | Control | Description |
 |---|---|
-| **Active Profile** | Dropdown to switch to an existing profile immediately. |
-| **New Profile** | Type a name and press Enter to create a new profile and switch to it. |
+| **Current Profile** | Dropdown to switch to an existing profile immediately. |
+| **New Profile** | Type a name and press Enter to create a copy of the current profile with that name and switch to it. |
 
-### Copying Settings
+### Copy From Another Profile
 
-Use **Copy From** to choose a source profile, then click **Copy Into Current Profile** to
-overwrite your current profile's settings with those from the source. A confirmation dialog
-prevents accidental overwrites.
+Choose a source profile and click **Copy Profile** to overwrite your current profile with
+that source's settings. A confirmation dialog prevents accidental overwrites.
 
-### Deleting Profiles
+### Delete a Profile
 
-Use **Profile to Delete** to select a profile, then click **Delete Profile**. You cannot
-delete the currently active profile or the *Default* profile.
+Select a profile and click **Delete Profile**. You cannot delete the currently active
+profile.
 
-### Resetting
+### Reset Current Profile
 
-**Reset to Defaults** restores every setting in the current profile back to the addon's
-built-in defaults. A confirmation dialog is shown first.
-
-### Example Profile
-
-**Reset Example Profile** recreates (or resets) the built-in *Example* profile, which
-demonstrates a fully customized look and feel. Use it as a starting point or as a reference
-for what the addon is capable of.
+- **Reset Profile** — restores every setting in the current profile to the built-in defaults.
+  A confirmation dialog is shown first.
+- **Reset Example Profile** — recreates (or resets) the built-in *Example* profile, which
+  demonstrates a fully customized look and feel. Useful as a starting point for a custom
+  layout.
 
 ### Import / Export
 
-You can share your profile with other players using a compressed text string.
+You can share your profile using a compressed text string.
 
 **To export:** Click **Export Profile**. A dialog opens with the export string pre-selected.
 Press Ctrl+C to copy it.
 
-**To import:** Click **Import Profile**. Paste the export string into the top box, type a
-name for the new profile in the bottom box, then click **Import**. The new profile is created
-and activated immediately.
+**To import:** Click **Import Profile**. Paste the string into the top box, type a name for
+the new profile in the bottom box, then click **Import**. The new profile is created and
+activated immediately.
 
-> **Note:** A version-mismatch warning is printed to chat if the exported string was created
-> with a different version of zQuestLog, but the import still proceeds.
+### Account Defaults
+
+**Global Default Profile** — the profile that new characters start on when they first load
+the addon.
 
 ---
 
@@ -700,13 +715,18 @@ and activated immediately.
 
 - **Re-show a closed tracker** — open the burger menu on any visible tracker and choose
   **Show Hidden Trackers** if it appears.
-- **Instant layout reset** — use the individual Reset buttons in each Appearance sub-tab
-  rather than the full profile reset to recover specific settings without losing everything.
-- **Stacking trackers cleanly** — enable the Tiling system and set a child tracker's
-  **Anchor Point** to *Top Left* and **Parent Anchor** to *Bottom Left* with Offset Y = 0 for
-  a seamless stack with no gap.
-- **Class-colored everything** — enable **Use Class Color** in both Style > UI Accent Color and
-  Style > Separator to get a cohesive class-themed look without touching any color pickers.
-- **Profiles as presets** — create a *Compact* profile with small fonts and tight spacing and
-  a *Detailed* profile with larger fonts and buffers, then switch between them with the Active
-  Profile dropdown.
+- **Instant section reset** — use the individual Reset buttons in each Appearance sub-tab
+  rather than a full profile reset to restore specific settings without losing everything else.
+- **Stacking trackers cleanly** — enable tiling and set the child tracker's **Child Anchor**
+  to *Top Left* with **Parent Anchor** *Bottom Left* and Offset Y = 0 for a seamless stack.
+- **Class-colored everything** — enable **Use Class Color** in Style and **Class Color
+  Separator** in the Separator section for a cohesive class theme without touching individual
+  color pickers.
+- **Profiles as layouts** — create a *Compact* profile with small fonts and tight spacing and
+  a *Detailed* profile with larger fonts and more padding, then switch between them instantly.
+- **Auto-hide buttons for a cleaner look** — enable **Auto-Hide Title Buttons** to keep the
+  title bar minimal until you need controls.
+- **Current Quest Area for dense hubs** — enable **Current Quest Area** when doing packed
+  outdoor quest hubs to instantly see only the quests relevant to where you are standing.
+- **TomTom arrow** — if you use TomTom, enable **Show TomTom Waypoint** so super-tracking a
+  quest automatically pulls up the navigation arrow.
