@@ -23,17 +23,18 @@ Open the settings panel at any time with:
 4. [Multiple Trackers](#multiple-trackers)
 5. [Quest Item Buttons](#quest-item-buttons)
 6. [Slash Commands](#slash-commands)
-7. [Settings — General](#settings--general)
-8. [Settings — Trackers](#settings--trackers)
-9. [Settings — Tiling](#settings--tiling)
-10. [Settings — Appearance > Fonts](#settings--appearance--fonts)
-11. [Settings — Appearance > Style](#settings--appearance--style)
-12. [Settings — Appearance > Colors](#settings--appearance--colors)
-13. [Settings — Appearance > Spacing](#settings--appearance--spacing)
-14. [Settings — Appearance > Quest Items](#settings--appearance--quest-items)
-15. [Settings — Sounds](#settings--sounds)
-16. [Settings — Profiles](#settings--profiles)
-17. [Tips and Tricks](#tips-and-tricks)
+7. [Keybinds](#keybinds)
+8. [Settings — General](#settings--general)
+9. [Settings — Trackers](#settings--trackers)
+10. [Settings — Tiling](#settings--tiling)
+11. [Settings — Appearance > Fonts](#settings--appearance--fonts)
+12. [Settings — Appearance > Style](#settings--appearance--style)
+13. [Settings — Appearance > Colors](#settings--appearance--colors)
+14. [Settings — Appearance > Spacing](#settings--appearance--spacing)
+15. [Settings — Appearance > Quest Items](#settings--appearance--quest-items)
+16. [Settings — Sounds](#settings--sounds)
+17. [Settings — Profiles](#settings--profiles)
+18. [Tips and Tricks](#tips-and-tricks)
 
 ---
 
@@ -119,6 +120,20 @@ tracker's burger menu, or via **Show Tracker** in Settings → Trackers → [Tra
 | **Shift + Left click** | Toggles the achievement as user-hidden. |
 | **Right click** | Opens the Achievements frame. |
 
+### Recipe Tiles
+
+Each tracked recipe appears as a title row showing the recipe name. When you have enough
+reagents to craft at least one, the count is appended: `Recipe Name - [N]`. Below it, each
+required reagent shows a progress line: `- [have/needed] Reagent Name`, colored red when
+short and green when the requirement is met. Recraft entries are labelled accordingly.
+
+Hovering a recipe tile shows the item tooltip for the recipe's output item.
+
+| Click | Action |
+|---|---|
+| **Shift + Left click** | Untracks the recipe (removes it from the tracker). |
+| **Right click** | Opens the professions UI to that recipe's entry. Not available for recraft entries. |
+
 ### Zone / Category Headers
 
 **Left click** a header to collapse or expand it. The collapsed state persists across
@@ -152,6 +167,7 @@ tooltip also shows each party member's current progress on that quest.
 | **Bonus Objectives** | Bonus objective tasks active in your current area. |
 | **Scenario** | The current scenario or dungeon encounter: stage name, objectives, progress bars, and Mythic+ timer block. |
 | **Achievements** | Achievements you have set to track in the Achievements UI. |
+| **Recipes** | Crafting recipes currently tracked in your professions UI, with per-reagent progress lines and a craftable count. |
 
 The vertical display order of categories and where separators are drawn can be changed under
 **Settings → Trackers → Category Display Order**.
@@ -227,6 +243,29 @@ take effect when combat ends.
 
 ---
 
+## Keybinds
+
+zQuestLog registers nine bindings in the WoW **Key Bindings** panel under the **zQuestLog**
+header. All bindings are unbound by default — assign keys from
+**Escape → Key Bindings → scroll to the zQuestLog section**.
+
+| Binding | Action |
+|---|---|
+| **Toggle Main Tracker** | Show or hide the Main Tracker (slot 0). |
+| **Toggle Tracker 1** | Show or hide Tracker 1. |
+| **Toggle Tracker 2** | Show or hide Tracker 2. |
+| **Toggle Tracker 3** | Show or hide Tracker 3. |
+| **Toggle Tracker 4** | Show or hide Tracker 4. |
+| **Toggle All Trackers** | Smart toggle: if any tracker with assigned content is currently hidden, shows all of them; if all are visible, hides all. |
+| **Toggle Hidden Quests** | Toggles the global **Show User-Hidden Quests** setting — identical to clicking the eye button on the title bar. |
+| **Toggle Dungeon Mode** | Toggles the **Dungeon Quest Filter** — identical to the dungeon button on the Main Tracker title bar. |
+| **Collapse/Expand All Trackers** | Smart toggle: if any tracker is expanded, minimizes all; if all are already minimized, expands all. |
+
+> Bindings that target a specific tracker (Toggle Main Tracker, Toggle Tracker 1–4) do
+> nothing if that tracker has no categories assigned to it.
+
+---
+
 ## Settings — General
 
 Open with `/zql options` then click the **General** tab.
@@ -277,6 +316,7 @@ Click **Tracking** in the sidebar under the General tab.
 
 | Setting | Description |
 |---|---|
+| **Use WoW Tracking** | When enabled, only quests that are actively tracked in the WoW quest log are shown — your per-quest Shift+click show/hide state is ignored entirely. This mirrors the behavior of the default Blizzard tracker and is useful when you want precise control over which quests appear by tracking or untracking them directly in the quest log. |
 | **Track Old Campaigns** | Groups quests from older expansion campaigns under their own campaign headers instead of treating them as regular zone quests. A confirmation dialog appears before the change takes effect. |
 | **Show Mythic+ Info** | Displays the keystone timer, death count, and active affixes below the Scenario tracker when a Mythic+ key is in progress. |
 | **Auto Track Nearest Quest** | Automatically super-tracks the closest quest that has a known map location. Runs on its own separate timer. |
@@ -318,8 +358,9 @@ Open with `/zql options` then click the **Trackers** tab.
 The root content of the Trackers tab lets you assign categories to tracker slots.
 
 - **Quests** is permanently assigned to the Main Tracker.
-- **World Quests**, **Bonus Objectives**, **Scenario**, and **Achievements** each have a
-  dropdown to assign them to the Main Tracker, Tracker 1–4, or *None* to disable them.
+- **World Quests**, **Bonus Objectives**, **Scenario**, **Achievements**, and **Recipes**
+  each have a dropdown to assign them to the Main Tracker, Tracker 1–4, or *None* to
+  disable them.
 
 **Category Display Order** — drag entries to change the vertical order categories appear
 across all trackers. The default order is: Scenario → World Quests → Bonus Objectives →
@@ -337,6 +378,7 @@ no assigned categories are hidden from the list.
 | **Show Tracker** | Shows or hides this tracker window. Disabled when no categories are assigned. |
 | **Addon in Title** | Includes the text *zQuestLog* in the title bar. |
 | **Categories in Title** | Shows short category abbreviations in the title bar. |
+| **Show Title Bar** | Shows or hides this tracker's title bar. When off, the bar is collapsed and content fills the window. In Unified Title Bar mode, the topmost visible tracker in a tile group still shows the shared bar. |
 | **Show Scroll Bar** | Displays a scroll bar when content overflows the window height. |
 | **Show When Empty** | When enabled (the default), the tracker remains visible even when it has no content. Disable this to auto-hide the tracker when empty and reappear when content exists. |
 | **Show in Instance** | When enabled (the default), the tracker is visible inside dungeons and raids. |
@@ -385,6 +427,19 @@ Open with `/zql options` then click the **Tiling** tab.
 | **Match Greatest Width** | All trackers in a tile group resize to match the widest visible member. |
 | **Match Greatest Height** | All trackers in a tile group resize to match the tallest visible member. |
 | **Constrict Height to Root** | Caps the combined vertical height of a tile group to the root tracker's Max Height. Requires the root tracker to have Dynamic Height enabled. |
+| **Unified Title Bar** | Uses one shared title bar per tile group: the topmost visible tracker shows the full bar, while other members collapse to separator-only bars. |
+
+### Unified Title Bar Options
+
+These options are available when both **Enable Tiling System** and **Unified Title Bar** are on.
+
+| Setting | Description |
+|---|---|
+| **Show Eye Toggle** | Shows the eye button in the unified bar. Only has effect when Tracker 0 is in the tile group. |
+| **Show Dungeon Toggle** | Shows the dungeon filter button in the unified bar. Only has effect when Tracker 0 is in the tile group. |
+| **Show Quest Count** | Shows the quest `N/M` count label in the unified bar. Only has effect when Tracker 0 is in the tile group. |
+| **Show Addon Prefix** | Includes `zQuestLog` in the unified title text. |
+| **Show Category Letters** | Includes the merged category abbreviation string in the unified title text. |
 
 ### Per-Tracker Tiling (Main Tracker, Tracker 1–4)
 
@@ -558,8 +613,11 @@ Objective.
 | **Timer Segment** | The tick-mark dividers on the timer bar. |
 | **Timer Background** | The unfilled background of the timer bar. |
 
+**Recipe Colors** — Recipe Header, Recipe Title, Recipe Objective, and Recipe Completed
+Objective.
+
 **Resets:** Reset Achievement Colors, Reset Scenario Colors, Reset Progress Bar Colors,
-Reset Timer Bar Colors.
+Reset Timer Bar Colors, Reset Recipe Colors.
 
 ---
 
